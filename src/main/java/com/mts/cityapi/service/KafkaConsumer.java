@@ -27,13 +27,19 @@ public class KafkaConsumer {
 
             logger.info(String.format("***** MyConsumer consumed message: key=%s, topic=%s, timestamp=%s, offset=%s, value=%s *****", key, topic, timestamp, offset, value));
 
-            // todo: write business logic to act on this event
             // in this case, we are publishing message to another topic, so that next microservice kicks-in
+            // check if message is for city api from incoming message
+            if(value.getDetailType().toLowerCase().equals("city")) // this message is meant for city api
+            {
+                logger.info("this message is meant for city api!");
 
-            // todo: remove city hardcoding, read it from incoming message
-            // String city = value.getDetailEntity().getJsonResult();
-            String city = "Mumbai";
-            this.outboundApi.publishMessage(city);
+                String city = this.outboundApi.getRandomCity();
+                this.outboundApi.publishMessage(city);
+            }
+            else
+            {
+                logger.info("this message is NOT for city api");
+            }
         }
         catch (Exception exception)
         {
