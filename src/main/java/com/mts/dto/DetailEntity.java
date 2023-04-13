@@ -1,4 +1,4 @@
-package com.mts.cityapi.events;
+package com.mts.dto;
 
 import lombok.Data;
 
