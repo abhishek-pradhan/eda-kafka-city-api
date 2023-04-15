@@ -18,7 +18,7 @@ VOLUME /tmp
 COPY --from=build /workspace/app/target/*.jar app.jar
 ENTRYPOINT ["java","-jar","/app.jar"]
 
-# Docker build image & run it
+# Docker build image & run it:
 # docker build -t eda-kafka-city-api .
-# docker run --name=eda-kafka-city-api -d -p 8081:8081 eda-kafka-city-api
+# docker run --name="eda-kafka-city-api" -d -p 8081:8081 --env="BOOTSTRAP_BROKERS=192.168.61.96:9092" --env="API_NINJAS_API_KEY=xpA7hTRnHlI30eI0ph19XB==gZH0DjKQnfsajUIj" eda-kafka-city-api
 # http://localhost:8081/actuator/health
